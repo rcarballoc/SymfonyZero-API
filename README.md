@@ -80,6 +80,13 @@ When you have your server running and configured, you can check the installation
 ```
 http://localhost:8000/config.php
 ```
+
+To check the swagger-like API, please go to:
+```
+http://localhost:8000/api/doc
+```
+
+
 Now you can build your own project using SymfonyZero API by yourself.
  
 # Features
@@ -99,7 +106,7 @@ SymfonyZero API has available a pre-configured third party bundles to give a sol
  * Landing page.
  * Swagger like interface
  * Comments Entity. CRUD for demonstration purposes.
- * data fixtures with example users
+ * data fixtures with example comments
 
   
 **Symfony Standard Edition**
