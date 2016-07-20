@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new SymfonyZero\ApiBundle\SymfonyZeroApiBundle(),
             /*Other bundles*/
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
