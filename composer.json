@@ -24,7 +24,9 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "jms/serializer-bundle": "^1.1",
         "nelmio/api-doc-bundle": "^2.13",
-        "nelmio/cors-bundle": "^1.4"
+        "nelmio/cors-bundle": "^1.4",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "raulfraile/ladybug-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
