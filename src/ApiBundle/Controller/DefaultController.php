@@ -1,6 +1,6 @@
 <?php
 
-namespace SymfonyZero\ApiBundle\Controller;
+namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Comments;
+use ApiBundle\Entity\Comments;
 
 class DefaultController extends FOSRestController
 {
@@ -34,8 +34,9 @@ class DefaultController extends FOSRestController
         $data=[];
         $http_code=200;
         $row_number = $request->query->get("row_number");
-        $entities=$this->getDoctrine()->getManager()->getRepository("AppBundle:Comments")->listComments($row_number);
+        $entities=$this->getDoctrine()->getManager()->getRepository("ApiBundle:Comments")->listComments($row_number);
         $data[]=array("success"=>true,"comments"=>$entities);
+
         return $this->sendResponse($data,$http_code);
     }
     
@@ -61,7 +62,7 @@ class DefaultController extends FOSRestController
         $http_code=200;
 
         $em=$this->getDoctrine()->getManager();
-        $comment=$em->getRepository("AppBundle:Comments")->findOneById($id);
+        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
         if($comment){
             $data[]=array(
                 "success"=>true,
@@ -139,7 +140,7 @@ class DefaultController extends FOSRestController
         $search_string=($request->request->get('search_string'))?$request->request->get('search_string'):"";
         if(!empty($search_string)){
             $em=$this->getDoctrine()->getManager();
-            $entities=$em->getRepository("AppBundle:Comments")->searchComments($search_string);
+            $entities=$em->getRepository("ApiBundle:Comments")->searchComments($search_string);
             $data[]=array("success"=>true,"comments"=>$entities);        
             
         } else {
@@ -174,7 +175,7 @@ class DefaultController extends FOSRestController
 
         $id=($request->request->get('id'))?$request->request->get('id'):"";
         $em=$this->getDoctrine()->getManager();
-        $comment=$em->getRepository("AppBundle:Comments")->findOneById($id);
+        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
         if($comment && !empty($id)){
             $em->remove($comment);
             $em->flush();
@@ -215,7 +216,7 @@ class DefaultController extends FOSRestController
         
         if(!empty($comment) && !empty($id)){
             $em=$this->getDoctrine()->getManager();
-            $entity=$em->getRepository("AppBundle:Comments")->findOneById($id);
+            $entity=$em->getRepository("ApiBundle:Comments")->findOneById($id);
             if($entity){
                 $entity->setComment($comment);
                 $em->flush();
