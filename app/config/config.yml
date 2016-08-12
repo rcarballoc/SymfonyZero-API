@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
+    - { resource: "@OauthBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -117,6 +118,16 @@ fos_user:
             enabled:    false
         form:
             type: symfonyzero_user_registration
+
+# Fos oAuth Bundle
+fos_oauth_server:
+    db_driver: orm
+    client_class:        OauthBundle\Entity\Client
+    access_token_class:  OauthBundle\Entity\AccessToken
+    refresh_token_class: OauthBundle\Entity\RefreshToken
+    auth_code_class:     OauthBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username_email
 
 # Nelmio Api Doc Bundle
 nelmio_api_doc:

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
@@ -42,6 +43,27 @@ class User extends BaseUser
     * @SerializedName("registrationDate")
     */
     protected $registrationDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OauthBundle\Entity\AccessToken", mappedBy="user", cascade={"remove"})
+     *
+     * @Exclude
+     */
+    protected $accessToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OauthBundle\Entity\RefreshToken", mappedBy="user", cascade={"remove"})
+     *
+     * @Exclude
+     */
+    protected $refreshToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OauthBundle\Entity\AuthCode", mappedBy="user", cascade={"remove"})
+     *
+     * @Exclude
+     */
+    protected $AuthCode;
 
 
     public function __construct()

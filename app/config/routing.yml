@@ -1,3 +1,8 @@
+oauth:
+    resource: "@OauthBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 symfony_zero_api:
     resource: "@ApiBundle/Controller/"
     type:     annotation
@@ -10,3 +15,9 @@ NelmioApiDocBundle:
 symfonyzero_user:
     resource: "@ApiBundle/Resources/config/userRouting.yml"
     prefix:   /v1
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
