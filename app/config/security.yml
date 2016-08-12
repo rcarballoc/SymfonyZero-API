@@ -27,7 +27,7 @@ security:
 
         api:
             pattern:    ^/v1
-            #fos_oauth:  true
+            fos_oauth:  true
             stateless:  true
             #switch_user_stateless: true
             anonymous:  true
