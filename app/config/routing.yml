@@ -6,3 +6,7 @@ symfony_zero_api:
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+
+symfonyzero_user:
+    resource: "@ApiBundle/Resources/config/userRouting.yml"
+    prefix:   /v1

@@ -6,3 +6,9 @@ services:
     symfonyzero.email:
         class:  AppBundle\Services\Email
         arguments: ['@swiftmailer.mailer', '@templating', '%mailer_user%']
+
+    symfonyzero_user.form.registration:
+        class: ApiBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: symfonyzero_user_registration }
+        arguments: [%fos_user.model.user.class%]
