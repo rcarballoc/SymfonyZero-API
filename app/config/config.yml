@@ -107,6 +107,17 @@ fos_rest:
 #        version: 1.0
 #        groups: [data]
 
+# Fos User Bundle
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: ApiBundle\Entity\User
+    registration:
+        confirmation:
+            enabled:    false
+        form:
+            type: symfonyzero_user_registration
+
 # Nelmio Api Doc Bundle
 nelmio_api_doc:
     name:                 SymfonyZero API Documentacion Webservice

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Manager;
+namespace ApiBundle\Manager;
 
 class UserManager extends BaseManager
 {

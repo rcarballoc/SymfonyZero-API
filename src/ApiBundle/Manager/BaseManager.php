@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Manager;
+namespace ApiBundle\Manager;
 
-use AppBundle\Repository\BaseRepository;
+use ApiBundle\Repository\BaseRepository;
 
 class BaseManager
 {
