@@ -3,7 +3,7 @@ SymfonyZero API
 
 # What is?
  
-SymfonyZero API is a free fully functional kickstarter edition. You can use it as a base for your Symfony web projects with a Web API architecture. SymfonyZero helps you to build web projects more quiclky, saving time in the early stages of the development.
+SymfonyZero API is a free fully functional kickstarter edition. You can use it as a base for your Symfony web projects with a Web API architecture. SymfonyZero helps you to build web projects more quiclky, saving time in the early stages of the development. You can build the backend with Symfony offering an API Rest which you can use to connect the frontend made with another technology.
 
 In this documentation you can learn about how to install, configure and how you can help to improve it. SymfonyZero API is an alive project and we'll be adding new features and improvements, so stay tuned for new updates.
 
@@ -11,7 +11,7 @@ If you detect an error, you know how to improve it or you have an idea about thi
 
 # Requirements
 
-SymfonyZero API uses the last LTS version: Symfony 2.8.6 (although you can change it easily), so you need to keep in your mind these requirements:
+SymfonyZero API uses the last LTS version: Symfony 2.8 (although you can change it easily), so you need to keep in your mind these requirements:
 
 **Mandatory**
  ```
@@ -39,8 +39,6 @@ POSIX needs to be enabled (only on *nix)
  ```
  
  If you change the Symfony version, these requirements could change. In this case you must visit the [oficial site] to check them.
- 
- ```
 
 # Setup
  
