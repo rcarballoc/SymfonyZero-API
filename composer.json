@@ -43,7 +43,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "Incentesev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -70,4 +70,5 @@
             "file": "app/config/parameters.yml"
         }
     }
+
 }
