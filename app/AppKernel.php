@@ -1,8 +1,6 @@
 <?php
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -28,7 +26,6 @@ class AppKernel extends Kernel
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new OauthBundle\OauthBundle(),
         ];
-
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
@@ -36,7 +33,6 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle();
         }
-
         return $bundles;
     }
 //php bin/console doctrine:fixture:load
@@ -44,17 +40,14 @@ class AppKernel extends Kernel
     {
         return __DIR__;
     }
-
     public function getCacheDir()
     {
         return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
     }
-
     public function getLogDir()
     {
         return dirname(__DIR__).'/var/logs';
     }
-
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
