@@ -84,9 +84,9 @@ fos_rest:
             html: true
         mime_types:
             json: ['application/json', 'application/x-json']
-            rss: 'application/rss+xml'
-            jpg: 'image/jpeg'
-            png: 'image/png'
+            rss:  ['application/rss+xml']
+            jpg:  ['image/jpeg']
+            png:  ['image/png']
         jsonp_handler: ~
     body_listener: true
     param_fetcher_listener: force
