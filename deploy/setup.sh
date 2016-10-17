@@ -60,12 +60,6 @@ fi
 GIT_ACTION="clone https://github.com/Emergya/SymfonyZero-API $SYMFONYPATH"
 COMPOSER_ACTION="install"
 
-if [ -d "$SYMFONYPATH" ]; then
-  cd $SYMFONYPATH
-  GIT_ACTION="pull origin"
-  COMPOSER_ACTION="update"
-fi
-
 # Update repo and Symfony deploy
 git $GIT_ACTION
 
@@ -74,21 +68,13 @@ cd $SYMFONYPATH
 printf "${GREEN}Install/Updating vendors:${NC} "
 composer $COMPOSER_ACTION
 
-#Create database only if we're on installing
-if [ "$COMPOSER_ACTION" = "install" ]; then
-    php bin/console doctrine:database:create
-else
-   printf "${YELLOW}Skipping Database creation${NC} "
-fi
-
+php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load
 php bin/console assetic:dump --env=prod --no-debug
 php bin/console cache:clear
 sudo chmod -R 777 $SYMFONYPATH/var/cache/
 sudo chmod -R 777 $SYMFONYPATH/var/logs/
-
-
 
 printf "${GREEN}Configuring Apache Virtualhost and restarting:${NC} "
 # Update and enable Apache2 config
