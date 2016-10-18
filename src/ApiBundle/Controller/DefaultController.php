@@ -13,7 +13,7 @@ use ApiBundle\Entity\Comments;
 class DefaultController extends FOSRestController
 {
     /**
-     * @Route("/list")
+     * @Route("/comments")
      * @Method({"GET"})
      *
      * @ApiDoc(
@@ -42,7 +42,7 @@ class DefaultController extends FOSRestController
     
     
     /**
-     * @Route("/")
+     * @Route("/comments/{id}")
      * @Method({"GET"})
      *
      * @ApiDoc(
@@ -83,8 +83,8 @@ class DefaultController extends FOSRestController
     
     
     /**
-     * @Route("/")
-     * @Method({"POST","PUT"})
+     * @Route("/comments")
+     * @Method({"POST"})
      *
      * @ApiDoc(
      *  resource=true,
@@ -116,45 +116,9 @@ class DefaultController extends FOSRestController
         }
         return $this->sendResponse($data,$http_code);        
     }
-    
-    
-    
-    /**
-     * @Route("/search")
-     * @Method({"POST","PUT"})
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Searchs for comments",
-     * )
-     * 
-     * @QueryParam(name="search_string", default=null , description="String to searchs")
-     * 
-     * 
-     */    
-    public function searchCommentsAction(Request $request){
-        $data=array();
-        $http_code=200;
 
-        
-        $search_string=($request->request->get('search_string'))?$request->request->get('search_string'):"";
-        if(!empty($search_string)){
-            $em=$this->getDoctrine()->getManager();
-            $entities=$em->getRepository("ApiBundle:Comments")->searchComments($search_string);
-            $data[]=array("success"=>true,"comments"=>$entities);        
-            
-        } else {
-            $http_code=500;
-            $data[]=array("success"=>false,"message"=>"Please, set a string to search");        
-        }
-        return $this->sendResponse($data,$http_code);        
-    }
-    
-    
-    
-    
     /**
-     * @Route("/")
+     * @Route("/comments/{id}")
      * @Method({"DELETE"})
      *
      * @ApiDoc(
@@ -189,13 +153,10 @@ class DefaultController extends FOSRestController
         return $this->sendResponse($data,$http_code);
         
     }
-    
-    
-    
-    
+
     /**
-     * @Route("/update")
-     * @Method({"POST"})
+     * @Route("/comments/{id}")
+     * @Method({"PUT"})
      *
      * @ApiDoc(
      *  resource=true,
@@ -210,9 +171,10 @@ class DefaultController extends FOSRestController
     public function updateCommentAction(Request $request){
         $data=array();
         $http_code=200;
-        
-        $comment=($request->request->get('comment'))?$request->request->get('comment'):"";
+
         $id=($request->request->get('id'))?$request->request->get('id'):"";
+        $em=$this->getDoctrine()->getManager();
+        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
         
         if(!empty($comment) && !empty($id)){
             $em=$this->getDoctrine()->getManager();

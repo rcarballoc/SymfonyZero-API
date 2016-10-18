@@ -35,9 +35,9 @@ if [ "$(version "$CURRENT_PHP_VERSION")" -lt "$(version "$PHP_VERSION")" ]; then
 	sudo apt-get install software-properties-common python-software-properties -y
     sudo add-apt-repository ppa:ondrej/php5-5.6 -y
     sudo apt-get update -y
-    #sudo apt-get install -y php5 php5-mcrypt libapache2-mod-php5 php5-curl php5-cli php5-mysql php5-gd php5-intl php5-xsl memcached php5-memcache curl
+    #sudo apt-get install php5 php5-mcrypt libapache2-mod-php5 php5-curl php5-cli php5-mysql php5-gd php5-intl php5-xsl memcached php5-memcache curl -y
     # If you prefer to install php 5.6, comment next line and uncomment the previous one
-    sudo apt-get install php7.0 php7.0-fpm php7.0-mysql php7.0-curl php7.0-xml php7.0-intl -y
+    sudo apt-get install php7.0 php7.0-mcrypt libapache2-mod-php7.0 php7.0-cli php7.0-fpm php7.0-mysql php7.0-curl php7.0-xml php7.0-intl -y
 fi
 
 # Git
