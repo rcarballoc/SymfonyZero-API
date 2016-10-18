@@ -89,7 +89,7 @@ fos_rest:
             png:  ['image/png']
         jsonp_handler: ~
     body_listener: true
-    param_fetcher_listener: force
+    param_fetcher_listener: false
     allowed_methods_listener: true
     access_denied_listener:
         json: true

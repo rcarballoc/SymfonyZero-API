@@ -39,6 +39,8 @@ POSIX needs to be enabled (only on *nix)
  ```
  
  If you change the Symfony version, these requirements could change. In this case you must visit the [oficial site] to check them.
+   
+ Note: Doctrine Data Fixtures Extension needs PHP 5.6 or higher, so if you want to use it, you have to ensure at least that version of PHP is installed.
 
 # Setup
  
@@ -49,6 +51,13 @@ First, you have to clone this repository in your web root directory:
  ```sh
 $ git clone https://github.com/Emergya/SymfonyZero-API.git
 ```
+
+To use Doctrine Data Fixtures you need PHP 5.6 or higher, so if you have previous version installed and you don't want to upgrade it, you have to remove this dependency in _composer.json_ deleting the line:
+
+ ```json
+"doctrine/doctrine-fixtures-bundle": "^2.3"
+```
+
 
 Then, you have to install vendors using Composer. If you don't have Composer installed, follow the instructions that you can find in [his web site](https://getcomposer.org/). Once you have Composer installed you'll can install vendors:
 
@@ -99,6 +108,9 @@ $ sudo ./setup.sh
 ```
 
 And you will have SymfonyZero-API running in your system. If you want to change anything of the process, you can edit _setup.sh_ file.
+
+By default, script will install PHP 7 if doesn't found any PHP version installed or find a previous version of PHP 5.6. This deploy is prepared to install a previous version, so if you prefer to install PHP 5.6 you can edit _setup.sh_ and
+follow the instructions you will find in it, you only have to comment one line and uncomment another one.
  
 # Features
  
@@ -172,7 +184,7 @@ Of course, *each bundle* has a lot of different configuration you can change to 
 
 SymfonyZero-API provides an example of data fixtures with some 'Comments'. You can use it to test the application.
 
-You can find the fixtures already created in _src/AppBundle/DataFixtures/ORM/CommentsFixtures.php_ and you can generate these datas using next console command:
+You can find the fixtures already created in _src/AppBundle/DataFixtures/ORM/CommentsFixtures.php_ and you can generate these datas using next console command (only if you didn't remove this dependency when you installed SymfonyZero-API):
 
 ```sh
 $ php bin/console doctrine:fixtures:load
