@@ -32,8 +32,8 @@ function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }
 if [ "$(version "$CURRENT_PHP_VERSION")" -lt "$(version "$PHP_VERSION")" ]; then
     printf "${GREEN}Installing php:${NC}\n"
 	sudo apt-get update -y
-	sudo apt-get install software-properties-common python-software-properties
-    sudo add-apt-repository ppa:ondrej/php5-5.6
+	sudo apt-get install software-properties-common python-software-properties -y
+    sudo add-apt-repository ppa:ondrej/php5-5.6 -y
     sudo apt-get update -y
     #sudo apt-get install -y php5 php5-mcrypt libapache2-mod-php5 php5-curl php5-cli php5-mysql php5-gd php5-intl php5-xsl memcached php5-memcache curl
     # If you prefer to install php 5.6, comment next line and uncomment the previous one
@@ -73,7 +73,7 @@ composer $COMPOSER_ACTION
 
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load -n
 php bin/console cache:clear
 sudo chmod -R 777 $SYMFONYPATH/var/cache/
 sudo chmod -R 777 $SYMFONYPATH/var/logs/
