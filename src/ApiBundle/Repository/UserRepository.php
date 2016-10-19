@@ -7,4 +7,5 @@ namespace ApiBundle\Repository;
  */
 class UserRepository extends BaseRepository
 {
+
 }

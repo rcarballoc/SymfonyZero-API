@@ -1,7 +1,12 @@
 parameters:
     symfonyzero.user.manager.class: ApiBundle\Manager\UserManager
+    symfonyzero.comment.manager.class: ApiBundle\Manager\CommentManager
 
 services:
     symfonyzero.user.manager:
-        class: %symfonyzero.user.manager.class%
-        arguments: [@symfonyzero.user.repository ]
+        class: "%symfonyzero.user.manager.class%"
+        arguments: ["@symfonyzero.user.repository" ]
+
+    symfonyzero.comment.manager:
+        class: "%symfonyzero.comment.manager.class%"
+        arguments: ["@symfonyzero.comment.repository" ]

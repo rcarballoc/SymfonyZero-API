@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Comments
+ * Comment
  *
- * @ORM\Table(name="comments")
- * @ORM\Entity(repositoryClass="ApiBundle\Repository\CommentsRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\CommentRepository")
  */
-class Comments {
+class Comment {
 
     /**
      * @var integer
@@ -57,7 +57,7 @@ class Comments {
      * Set comment
      *
      * @param string $comment
-     * @return Comments
+     * @return Comment
      */
     public function setComment($comment) {
         $this->comment = $comment;
@@ -78,7 +78,7 @@ class Comments {
      * Set date
      *
      * @param \DateTime $date
-     * @return Comments
+     * @return Comment
      */
     public function setDate($date) {
         $this->date = $date;
