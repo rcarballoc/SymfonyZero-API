@@ -28,8 +28,9 @@ class CommentFixtures implements FixtureInterface, ContainerAwareInterface
 
 	public function load(ObjectManager $manager)
 	{
+	    $numComments = 10;
 	    $comments = [];
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < $numComments; $i++){
             $comment = new Comment();
             $comment->setComment("Comment #".$i);
             $comment->setDate(new \DateTime('now'), new \DateTimeZone('UTC'));
