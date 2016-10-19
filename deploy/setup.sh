@@ -75,8 +75,8 @@ php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load -n
 php bin/console cache:clear
-sudo chmod -R 777 $SYMFONYPATH/var/cache/
-sudo chmod -R 777 $SYMFONYPATH/var/logs/
+sudo chmod -R 777 $SYMFONYPATH/var/cache/*
+sudo chmod -R 777 $SYMFONYPATH/var/logs/*
 
 printf "${GREEN}Configuring Apache Virtualhost and restarting:${NC} "
 # Update and enable Apache2 config
