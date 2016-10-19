@@ -130,7 +130,6 @@ SymfonyZero API has available a pre-configured third party bundles to give a sol
 *  [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) - KnpPaginatorBundle is a friendly Symfony paginator to paginate everything.
 *  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) - FOSUserBundle provides a flexible framework for user management that aims to handle common tasks such as user registration and password retrieval.
 *  [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) - FOSOAuthServerBundle provides a server side OAuth2 implementation.
-*  [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) - FOSOAuthServerBundle provides a server side OAuth2 implementation.
 
 **Common Sections and Funcionallity**
  
@@ -138,7 +137,6 @@ SymfonyZero API has available a pre-configured third party bundles to give a sol
  * Swagger interface with API Documentation
  * Comments Entity. CRUD for demonstration purposes
  * Data fixtures with example comments
- * Preconfigured path with CRUD and search operations
  * Register system and OAuth 2.0 Authentication
   
 **Symfony Standard Edition**
