@@ -12,9 +12,9 @@ NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
 
-symfonyzero_user:
-    resource: "@ApiBundle/Resources/config/userRouting.yml"
-    prefix:   /v1
+#symfonyzero_user:
+#    resource: "@ApiBundle/Resources/config/userRouting.yml"
+#    prefix:   /v1
 
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

@@ -109,6 +109,9 @@ $ sudo ./setup.sh
 
 And you will have SymfonyZero-API running in your system. If you want to change anything of the process, you can edit _setup.sh_ file.
 
+For example, by default SymfonyZero-API is installed in _/var/www/SymfonyZero-API/_ directory, but you can modify it changing in _setup.sh_ var _SYMFONYPATH_, and
+ of course, changing that path in the virtual host (_symfonyzeroapi.conf_).
+
 By default, script will install PHP 7 if doesn't found any PHP version installed or find a previous version of PHP 5.6. This deploy is prepared to install a previous version, so if you prefer to install PHP 5.6 you can edit _setup.sh_ and
 follow the instructions you will find in it, you only have to comment one line and uncomment another one.
  

@@ -3,202 +3,154 @@
 namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
 use Symfony\Component\HttpFoundation\Request;
-use ApiBundle\Entity\Comments;
+use ApiBundle\Form\CommentType;
+use ApiBundle\Entity\Comment;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends FOSRestController
 {
     /**
-     * @Route("/comments")
-     * @Method({"GET"})
+     * @Rest\Get("/comments")
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Returns a list entities, can set the number of results.",
-     *  filters={
-     *      {"name"="row_number", "dataType"="integer"},     
-     *  }
+     *  section="Comments",
+     *  description="Returns a list of comments.",
+     *  output="ApiBundle\Entity\Comment"
      * )
-     * 
-     * @QueryParam(name="row_number", default=null , description="Amount of entities to return, if empty returns it all. (Configured for a max of 1000 entities)")
-     * 
-     * 
+     *
      */
 
-    public function listAction(Request $request, $row_number=null)
+    public function indexAction()
     {
-        $data=[];
-        $http_code=200;
-        $row_number = $request->query->get("row_number");
-        $entities=$this->getDoctrine()->getManager()->getRepository("ApiBundle:Comments")->listComments($row_number);
-        $data[]=array("success"=>true,"comments"=>$entities);
-
-        return $this->sendResponse($data,$http_code);
+        return ['data' => $this->get('symfonyzero.comment.manager')->all()];
     }
     
     
     /**
-     * @Route("/comments/{id}")
-     * @Method({"GET"})
+     * @Rest\Get("/comments/{id}")
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Returns the entity identified by its id",
-     *  filters={
-     *      {"name"="id", "dataType"="integer"},     
-     *  }
+     *  section="Comments",
+     *  description="Returns the comment identified by the id provided",
+     *  output="ApiBundle\Entity\Comment"
      * )
      * 
-     * @QueryParam(name="id", default=null , description="Comment ID")
+     * @RequestParam(name="id", default=null , description="Comment ID")
      * 
      * 
      */    
-    public function getCommentAction(Request $request,$id){
-        $data=array();
-        $http_code=200;
+    public function getAction($id)
+    {
+        $comment = $this->get('symfonyzero.comment.manager')->getOneById($id);
 
-        $em=$this->getDoctrine()->getManager();
-        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
-        if($comment){
-            $data[]=array(
-                "success"=>true,
-                "comment"=>$comment->getComment(),
-                "date"=>$comment->getDate()->format("Y-m-d H:i:s")
-                    );
-
-        } else {
-            $http_code=500;
-            $data[]=array("success"=>false,"msg"=>"Comment not found!");
-            
+        if(!$comment) {
+            throw new NotFoundHttpException("Comment not found");
         }
-                
-        return $this->sendResponse($data,$http_code);
-        
-    }
-    
-    
-    
-    /**
-     * @Route("/comments")
-     * @Method({"POST"})
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Register a new comment",
-     * )
-     * 
-     * @QueryParam(name="comment", default=null , description="Comment to register")
-     * 
-     * 
-     */    
-    public function addCommentAction(Request $request){
-        $data=array();
-        $http_code=200;
 
-        
-        $comment=($request->request->get('comment'))?$request->request->get('comment'):"";
-        if(!empty($comment)){
-            $entity=new Comments();
-            $entity->setComment($comment);
-            $entity->setDate(new \Datetime('now'));
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-            $data[]=array("success"=>true,"id"=>$entity->getId());        
-            
-        } else {
-            $http_code=500;
-            $data[]=array("success"=>false);        
-        }
-        return $this->sendResponse($data,$http_code);        
+        return ['data' => $comment];
     }
+
 
     /**
-     * @Route("/comments/{id}")
-     * @Method({"DELETE"})
+     *
+     * @Rest\Post("/comments")
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Removes an entity identified by its id",
-     *  filters={
-     *      {"name"="id", "dataType"="integer"},     
-     *  }
+     *  section="Comments",
+     *  description="Create new comment",
+     *  input="ApiBundle\Form\CommentType",
+     *  output="ApiBundle\Entity\Comment"
      * )
-     * 
-     * @QueryParam(name="id", default=null , description="Comment ID")
-     * 
-     * 
-     */    
-    public function deleteCommentAction(Request $request,$id){
-        $data=array();
-        $http_code=200;
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $comment = new Comment();
 
-        $id=($request->request->get('id'))?$request->request->get('id'):"";
-        $em=$this->getDoctrine()->getManager();
-        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
-        if($comment && !empty($id)){
-            $em->remove($comment);
-            $em->flush();
-            $data[]=array("success"=>true);
+        $form = $this->createForm(new CommentType(), $comment);
+        $form->submit($request->request->all());
 
+        if ($form->isValid()) {
+            $date = new \DateTime("now", new \DateTimeZone('UTC'));
+            $comment->setDate($date);
+
+            $this->get('symfonyzero.comment.manager')->create($comment);
+
+            return ['data' => $comment];
         } else {
-            $http_code=500;
-            $data[]=array("success"=>false,"msg"=>"Comment not found!");            
+            return ['data' => $form];
         }
-                
-        return $this->sendResponse($data,$http_code);
-        
     }
+
 
     /**
-     * @Route("/comments/{id}")
-     * @Method({"PUT"})
+     *
+     * @Rest\Put("/comments/{id}")
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Update a comment",
+     *  section="Comments",
+     *  description="Update a specific Comment",
+     *  input="ApiBundle\Form\CommentType",
+     *  output="ApiBundle\Entity\Comment"
      * )
-     * 
-     * @QueryParam(name="id", default=null , description="Id for the comment to update")
-     * @QueryParam(name="comment", default=null , description="New comment")
-     * 
-     * 
-     */    
-    public function updateCommentAction(Request $request){
-        $data=array();
-        $http_code=200;
+     *
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $comment = $this->get('symfonyzero.comment.manager')->getOneById($id);
 
-        $id=($request->request->get('id'))?$request->request->get('id'):"";
-        $em=$this->getDoctrine()->getManager();
-        $comment=$em->getRepository("ApiBundle:Comments")->findOneById($id);
-        
-        if(!empty($comment) && !empty($id)){
-            $em=$this->getDoctrine()->getManager();
-            $entity=$em->getRepository("ApiBundle:Comments")->findOneById($id);
-            if($entity){
-                $entity->setComment($comment);
-                $em->flush();
-                $data[]=array("success"=>true,"id"=>$entity->getId());        
-            } else {
-                $http_code=500;
-                $data[]=array("success"=>false,"message"=>'Comment not found');                        
-            }
-        } else {
-            $http_code=500;
-            $data[]=array("success"=>false,"message"=>'Invalid parameters');        
+        if(!$comment) {
+            throw new NotFoundHttpException("Comment not found");
         }
-        return $this->sendResponse($data,$http_code);        
+
+        $date = $comment->getDate();
+
+        $form = $this->createForm(new CommentType(), $comment);
+        $form->submit($request->request->all());
+
+        if ($form->isValid()) {
+            $comment->setDate($date);
+            $this->get('symfonyzero.comment.manager')->update($comment);
+
+            return ['data' => $comment];
+        } else {
+            return ['data' => $form];
+        }
     }
-    
-    private function sendResponse($data,$http_code){
-        $view = $this->view($data, $http_code)
-            ->setTemplate("ApiBundle:index.html.twig")
-            ->setTemplateVar('data')
-        ;
-        return $this->handleView($view);
+
+
+    /**
+     *
+     * @Rest\Delete("/comments/{id}")
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Comments",
+     *  description="Delete a specific Comment"
+     * )
+     *
+     * @RequestParam(name="id", default=null , description="Comment ID")
+     *
+     */
+    public function deleteAction($id)
+    {
+        $comment = $this->get('symfonyzero.comment.manager')->getOneById($id);
+        
+        if (!$comment) {
+            throw new NotFoundHttpException("Comment not found");
+        }
+
+        $this->get('symfonyzero.comment.manager')->delete($comment);
+
+        return ['data' => ''];
     }
+
 }

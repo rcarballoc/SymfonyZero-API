@@ -1,10 +1,16 @@
 parameters:
     symfonyzero.user.repository.class: ApiBundle\Repository\UserRepository
+    symfonyzero.comment.repository.class: ApiBundle\Repository\CommentRepository
 
 services:
     symfonyzero.user.repository:
-        class: %symfonyzero.user.repository.class%
+        class: "%symfonyzero.user.repository.class%"
         public: true
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: [ ApiBundle\Entity\User ]
+
+    symfonyzero.comment.repository:
+        class: "%symfonyzero.comment.repository.class%"
+        public: true
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ ApiBundle\Entity\Comment ]
