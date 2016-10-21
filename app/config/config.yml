@@ -196,7 +196,7 @@ nelmio_cors:
             '^/':
                 origin_regex: true
                 allow_origin: ['^http://localhost:[0-9]+']
-                allow_headers: ['X-Custom-Auth']
+                allow_headers: ['X-Custom-Auth', 'X-Switch-User']
                 allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
                 max_age: 3600
                 hosts: ['^api\.']
@@ -212,3 +212,8 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+#Switch-User-Stateless Bundle
+switch_user_stateless:
+    parameter: 'X-Switch-User'
+    role: 'ROLE_ALLOWED_TO_SWITCH'

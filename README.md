@@ -138,6 +138,7 @@ SymfonyZero-API has available a pre-configured third party bundles to give a sol
 *  [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) - KnpPaginatorBundle is a friendly Symfony paginator to paginate everything.
 *  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) - FOSUserBundle provides a flexible framework for user management that aims to handle common tasks such as user registration and password retrieval.
 *  [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) - FOSOAuthServerBundle provides a server side OAuth2 implementation.
+*  [SwitchUserStatelessBundle](https://github.com/lafourchette/SwitchUserStatelessBundle) - SwitchUserStatelessBundle allows admins to impersonate other users.
 
 **Common Sections and Functionality**
  

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b0f8a7e8b9a83342687240d5ff05bd42",
-    "content-hash": "19420b44a8d3f35a310b08a5e0c71ed4",
+    "hash": "9e9790e7e6db2098ac709848dc7c0462",
+    "content-hash": "9e9c4b4bb52adff698a9d2b1bc97ac6d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1569,6 +1569,76 @@
                 "paginator"
             ],
             "time": "2016-04-20 11:40:30"
+        },
+        {
+            "name": "lafourchette/switch-user-stateless-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lafourchette/SwitchUserStatelessBundle.git",
+                "reference": "a79bbfefafd2427363e7bf7813b950ba0c6f83a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lafourchette/SwitchUserStatelessBundle/zipball/a79bbfefafd2427363e7bf7813b950ba0c6f83a7",
+                "reference": "a79bbfefafd2427363e7bf7813b950ba0c6f83a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "symfony/config": "^2.3|^3.0",
+                "symfony/dependency-injection": "^2.3|^3.0",
+                "symfony/http-foundation": "^2.3|^3.0",
+                "symfony/http-kernel": "^2.3|^3.0",
+                "symfony/security-bundle": "^2.3|^3.0",
+                "symfony/security-core": "^2.3|^3.0",
+                "symfony/security-http": "^2.3|^3.0"
+            },
+            "require-dev": {
+                "behat/behat": "^3.0",
+                "behat/symfony2-extension": "^2.0",
+                "doctrine/doctrine-bundle": "^1.2",
+                "doctrine/orm": "^2.2,>=2.2.3",
+                "phpunit/phpunit": "<5.0",
+                "symfony/browser-kit": "^2.3|^3.0",
+                "symfony/serializer": "^2.3|^3.0"
+            },
+            "suggest": {
+                "psr/log": "To log user requests",
+                "symfony/event-dispatcher": "To dispatch a switch user event"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaFourchette\\SwitchUserStatelessBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Chalamon",
+                    "email": "vincentchalamon@gmail.com",
+                    "homepage": "http://blog.vincent-chalamon.fr"
+                }
+            ],
+            "description": "Bundle to use impersonating on Symfony API",
+            "keywords": [
+                "Impersonating",
+                "api",
+                "rest"
+            ],
+            "time": "2016-06-22 09:11:04"
         },
         {
             "name": "michelf/php-markdown",
@@ -3389,7 +3459,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "friendsofsymfony/oauth-server-bundle": 20
+        "friendsofsymfony/oauth-server-bundle": 20,
+        "lafourchette/switch-user-stateless-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
