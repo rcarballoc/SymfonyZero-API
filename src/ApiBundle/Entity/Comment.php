@@ -8,6 +8,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Comment
  *
+ * @Serializer\XmlRoot("comment")
+ *
+ * @Hateoas\Relation("self", href = @Hateoas\Route("get_comments", parameters = { "comment" = "expr(object.getId())" }))
+ * @Hateoas\Relation("comments", href = @Hateoas\Route("cget_comments"))))
+ *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\CommentRepository")
  */
