@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new ApiBundle\ApiBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             /*Other bundles*/
-            //new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
