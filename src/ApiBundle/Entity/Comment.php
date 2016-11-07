@@ -4,9 +4,15 @@ namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Comment
+ *
+ * @Serializer\XmlRoot("comment")
+ * @Hateoas\Relation("self", href = "expr('/v1/comments/' ~ object.getId())")
+ * @Hateoas\Relation("comments", href = "expr('/v1/comments')")
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\CommentRepository")
@@ -16,6 +22,7 @@ class Comment {
     /**
      * @var integer
      *
+     * @Serializer\XmlAttribute
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
