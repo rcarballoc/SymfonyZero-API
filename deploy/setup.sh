@@ -26,6 +26,7 @@ fi
 # PHP and Curl
 CURRENT_PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "[5-7]+[.]\d+[.]\d+" | awk '{print $1; exit}');
 PHP_VERSION='5.6'
+CURRENT_USER=$(echo $SUDO_USER)
 
 function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
 
@@ -62,6 +63,7 @@ fi
 # Downloads/Update SymfonyZero-API
 GIT_ACTION="clone https://github.com/Emergya/SymfonyZero-API $SYMFONYPATH"
 COMPOSER_ACTION="install"
+sudo chown -R $CURRENT_USER:$CURRENT_USER $SYMFONYPATH
 
 # Update repo and Symfony deploy
 git $GIT_ACTION
