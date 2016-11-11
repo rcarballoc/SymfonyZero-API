@@ -115,7 +115,15 @@ follow the instructions you will find in it, you only have to comment one line a
 
 # How to update
 
-If you update your repository with a new version of SymfonyZero-API of with your new changes, you don't need to do again all the commands includes in the previous section. To do it quicker we provides a console command which execute the needed commands for you. To run it:
+If you update your repository with a new version of SymfonyZero-API of with your new changes, you don't need to do again all the commands includes in the previous section. To do it quicker we provides a console command which execute the needed commands for you. 
+
+First you have to install new composer dependencies:
+
+```sh
+$ composer install
+```
+
+Then, to run the update command:
 
 ```sh
 $ php bin/console zero:deploy
@@ -139,6 +147,8 @@ SymfonyZero-API has available a pre-configured third party bundles to give a sol
 *  [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) - FOSUserBundle provides a flexible framework for user management that aims to handle common tasks such as user registration and password retrieval.
 *  [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) - FOSOAuthServerBundle provides a server side OAuth2 implementation.
 *  [SwitchUserStatelessBundle](https://github.com/lafourchette/SwitchUserStatelessBundle) - SwitchUserStatelessBundle allows admins to impersonate other users.
+*  [BazingaHateoasBundle](https://github.com/willdurand/BazingaHateoasBundle) - BazingaHateoasBundle provides support to build a 3rd level of API Rest. 
+Image 
 
 **Common Sections and Functionality**
  
