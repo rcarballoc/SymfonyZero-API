@@ -33,7 +33,6 @@ class CommentFixtures implements FixtureInterface, ContainerAwareInterface
         for ($i = 0; $i < $numComments; $i++){
             $comment = new Comment();
             $comment->setComment("Comment #".$i);
-            $comment->setDate(new \DateTime('now'), new \DateTimeZone('UTC'));
 
             $comments[] = $comment;
         }
