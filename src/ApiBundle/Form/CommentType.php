@@ -12,12 +12,7 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment', null, [])
-            ->add('date', DateTimeType::class, array(
-                'widget' => 'single_text',
-                'model_timezone' => 'UTC',
-            ))
-        ;
+            ->add('comment', null, []);
     }
 
     public function configureOptions(OptionsResolver $resolver)

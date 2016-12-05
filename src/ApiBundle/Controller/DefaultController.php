@@ -78,9 +78,6 @@ class DefaultController extends FOSRestController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $date = new \DateTime("now", new \DateTimeZone('UTC'));
-            $comment->setDate($date);
-
             $this->get('symfonyzero.comment.manager')->create($comment);
 
             return ['data' => $comment];
@@ -111,13 +108,10 @@ class DefaultController extends FOSRestController
             throw new NotFoundHttpException("Comment not found");
         }
 
-        $date = $comment->getDate();
-
         $form = $this->createForm(new CommentType(), $comment);
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $comment->setDate($date);
             $this->get('symfonyzero.comment.manager')->update($comment);
 
             return ['data' => $comment];

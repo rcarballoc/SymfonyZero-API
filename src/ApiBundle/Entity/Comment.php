@@ -46,10 +46,15 @@ class Comment {
 
     /**
      * @var \DateTime
-     * @Assert\DateTime(message="Incorrect date foramt")
+     * @Assert\DateTime(message="Incorrect date format")
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
 
     /**
      * Get id
