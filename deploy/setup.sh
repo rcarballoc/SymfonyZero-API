@@ -26,15 +26,15 @@ fi
 # PHP and Curl
 CURRENT_PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "[5-7]+[.]\d+[.]\d+" | awk '{print $1; exit}');
 PHP_VERSION='5.6'
+CURRENT_USER=$(echo $SUDO_USER)
 
 function version { echo "$@" | gawk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }'; }
 
 if [ "$(version "$CURRENT_PHP_VERSION")" -lt "$(version "$PHP_VERSION")" ]; then
-    printf "${GREEN}Installing php:${NC}\n"
-	sudo apt-get update -y
-	sudo apt-get install software-properties-common python-software-properties -y
-    sudo add-apt-repository ppa:ondrej/php5-5.6 -y
+    printf "${GREEN}Installing php:${NC}\n"	
     sudo apt-get update -y
+    sudo apt-get install software-properties-common python-software-properties -y
+    sudo add-apt-repository ppa:ondrej/php -y
     #sudo apt-get install php5 php5-mcrypt libapache2-mod-php5 php5-curl php5-cli php5-mysql php5-gd php5-intl php5-xsl memcached php5-memcache curl -y
     # If you prefer to install php 5.6, comment next line and uncomment the previous one
     sudo apt-get install php7.0 php7.0-mcrypt libapache2-mod-php7.0 php7.0-cli php7.0-fpm php7.0-mysql php7.0-curl php7.0-xml php7.0-intl -y
@@ -62,6 +62,7 @@ fi
 # Downloads/Update SymfonyZero-API
 GIT_ACTION="clone https://github.com/Emergya/SymfonyZero-API $SYMFONYPATH"
 COMPOSER_ACTION="install"
+sudo chown -R $CURRENT_USER:$CURRENT_USER $SYMFONYPATH
 
 # Update repo and Symfony deploy
 git $GIT_ACTION
@@ -75,8 +76,9 @@ php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load -n
 php bin/console cache:clear
-sudo chmod -R 777 $SYMFONYPATH/var/cache/*
-sudo chmod -R 777 $SYMFONYPATH/var/logs/*
+php bin/console cache:clear --env=prod
+sudo chmod -R 777 $SYMFONYPATH/var/cache
+sudo chmod -R 777 $SYMFONYPATH/var/logs
 
 printf "${GREEN}Configuring Apache Virtualhost and restarting:${NC} "
 # Update and enable Apache2 config

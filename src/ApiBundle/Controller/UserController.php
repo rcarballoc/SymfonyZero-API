@@ -53,8 +53,6 @@ class UserController extends FOSRestController
         $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $user->setRegistrationDate(new \DateTime("now", new \DateTimeZone("UCT")));
-
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
