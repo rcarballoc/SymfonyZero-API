@@ -1,7 +1,6 @@
 SymfonyZero API
 ================
-
-# What is?
+# What is? 
  
 SymfonyZero API is a free fully functional kickstarter edition. You can use it as a base for your Symfony web projects with a Web API architecture. SymfonyZero helps you to build web projects more quiclky, saving time in the early stages of the development. You can build the backend with Symfony offering an API Rest which you can use to connect the frontend made with another technology.
 
