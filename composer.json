@@ -34,6 +34,7 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "erusev/parsedown": "^1.6",
         "lafourchette/switch-user-stateless-bundle": "dev-master",
         "willdurand/hateoas-bundle": "^1.2"
     },
