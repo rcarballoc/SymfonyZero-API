@@ -21,3 +21,7 @@ fos_oauth_server_token:
 
 fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+demo:
+    resource: "@ApiBundle/Controller/"
+    #type:     annotation
